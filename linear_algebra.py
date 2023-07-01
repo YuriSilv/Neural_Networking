@@ -1,3 +1,17 @@
+import random
+
+def create_matrix(rows: int, cols: int, randomize: bool = False, round_factor: int = 3):
+    matriz = []
+    for row in range(rows):
+        matriz.append([])
+        for _ in range(cols):
+            if(randomize):
+                matriz[row].append(round(random.random(), round_factor))
+                continue
+            matriz[row].append(0)
+    
+    return matriz
+
 def transposta(a: list):
     c = []
     for i in range(len(a[0])):
@@ -58,4 +72,26 @@ def acceptable_matrix(a: list, limit_upper: float = 0.1, limit_lower: float = -0
                 return False
             
     return True
-    
+
+def norma(a: list):
+    norma = 0
+    for i in range(len(a)):
+        for j in range(len(a[0])):
+            norma += a[i][j] ** 2
+    return norma ** (1/2)
+
+def dot_product(a: list, b: list):
+    if(len(a) != len(b)):
+        raise Exception("Vetores de tamanhos diferentes")
+    total = 0
+    for i in range(len(a)):
+        for j in range(len(a[0])):
+            total += a[i][j] * b[i][j]
+
+    return total
+
+def print_matrix(a: list):
+    for i in range(len(a)):
+        for j in range(len(a[0])):
+            print(a[i][j], end=' ')
+        print()

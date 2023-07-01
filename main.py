@@ -1,19 +1,51 @@
-from Widrow_Hoff_networking import neural_net
+from neural_nets import *
+import linear_algebra
 
-n = 0.2
+if __name__ == "__main__":
 
-w0 = [[0, 0, 0, 0], 
-     [0, 0, 0, 0],
-     [0, 0, 0, 0],
-     [0, 0, 0, 0]]
+     """n = 0.2
 
-estimulo =  [[-1, 1], 
-            [-1,-1],
-            [1, -1],
-            [-1, 1]]
+     w0 = [[0, 0, 0, 0], 
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0]]
+
+     estimulo =  [[-1, 1], 
+               [-1,-1],
+               [1, -1],
+               [-1, 1]]
 
 
-model = neural_net(n, w0, estimulo, 24)
+     model = associativa(n, w0, estimulo, 24)
 
-model.fit()
-print(model.predict(estimulo))
+     model.fit()
+     print(model.predict(estimulo))"""
+
+     X_atributos = [[1, 1, 0, 0, 1, 1, 0, 0, 0], 
+                    [0, 0, 0, 1, 0, 1, 1, 1, 1],
+                    [0, 0, 0, 0, 0, 0, 1, 1, 1],
+                    [0, 0, 0, 1, 1, 1, 1, 0 ,1],
+                    [1, 1, 1, 0, 0, 0, 0, 1, 0],
+                    [1, 0, 1, 0, 1, 1, 1, 0, 0]]
+
+     T_categorias =  [[0, 0, 0, 0, 0, 0, 1, 1, 1],
+                      [1, 1, 1, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 1, 1, 1, 0, 0, 0]]
+     
+     w0 = [[0, 0, 0],
+           [0, 0, 0],
+           [0, 0, 0],
+           [0, 0, 0],
+           [0, 0, 0],
+           [0, 0, 0]]
+     
+     n = 0.01
+
+     model = Adaline(n, X_atributos, T_categorias, 10000)
+
+     model.fit()
+     
+     linear_algebra.print_matrix(model.w0)
+
+
+
