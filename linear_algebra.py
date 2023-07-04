@@ -80,15 +80,11 @@ def norma(a: list):
             norma += a[i][j] ** 2
     return norma ** (1/2)
 
-def dot_product(a: list, b: list):
-    if(len(a) != len(b)):
-        raise Exception("Vetores de tamanhos diferentes")
-    total = 0
-    for i in range(len(a)):
-        for j in range(len(a[0])):
-            total += a[i][j] * b[i][j]
+def calcular_erro_abs(matriz_erro):
+    soma_absoluta = sum(sum(abs(valor) for valor in linha) for linha in matriz_erro)
+    
+    return soma_absoluta
 
-    return total
 
 def print_matrix(a: list):
     for i in range(len(a)):

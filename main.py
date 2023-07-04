@@ -41,7 +41,7 @@ if __name__ == "__main__":
      
      n = 0.01
 
-     model = Adaline(n, X_atributos, T_categorias, 10000)
+     model = Adaline(n, X_atributos, T_categorias, 300)
 
      model.fit()
      

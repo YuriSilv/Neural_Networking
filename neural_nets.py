@@ -37,7 +37,7 @@ class Adaline():
           while(self.maxInterator != 0):
                organismo = linear_algebra.matriz_multi(linear_algebra.transposta(self.w0), self.x_atr)
                erro_matriz = linear_algebra.matriz_sum(self.t_res, organismo, isSub=True)
-               print(f'Erro e = {linear_algebra.dot_product(erro_matriz, erro_matriz)}')
+               print(f'Erro e = {linear_algebra.calcular_erro_abs(erro_matriz)}')
                delta_w = linear_algebra.matriz_multi_scalar(linear_algebra.matriz_multi(self.x_atr, linear_algebra.transposta(erro_matriz)), self.n)
                self.w0 = linear_algebra.matriz_sum(self.w0, delta_w)
                self.maxInterator -= 1
