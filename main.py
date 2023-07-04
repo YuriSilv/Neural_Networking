@@ -41,11 +41,8 @@ if __name__ == "__main__":
      
      n = 0.01
 
-     model = Adaline(n, X_atributos, T_categorias, 300)
+     model = Adaline_logistica(n, X_atributos, T_categorias, 30000, 6, 3)
 
      model.fit()
      
-     linear_algebra.print_matrix(model.w0)
-
-
-
+     linear_algebra.print_matrix(linear_algebra.transposta(model.organismo))

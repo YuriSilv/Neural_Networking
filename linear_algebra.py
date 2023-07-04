@@ -1,4 +1,5 @@
 import random
+import math
 
 def create_matrix(rows: int, cols: int, randomize: bool = False, round_factor: int = 3):
     matriz = []
@@ -87,7 +88,31 @@ def calcular_erro_abs(matriz_erro):
 
 
 def print_matrix(a: list):
+    for row in a:
+        print("[", end=" ")
+        for element in row:
+            print(element, end=" ")
+        print("]")
+
+
+def hadamard_multi(a: list, b: list):
+    matriz = [[0] * len(a[0]) for _ in range(len(a))]
+
     for i in range(len(a)):
         for j in range(len(a[0])):
-            print(a[i][j], end=' ')
-        print()
+            matriz[i][j] = a[i][j] * b[i][j]
+
+    return matriz
+
+def escalar_subtr(x: float, a: list):
+    matriz = [[0] * len(a[0]) for _ in range(len(a))]
+
+    for i in range(len(a)):
+        for j in range(len(a[0])):
+            matriz[i][j] = x - a[i][j]
+
+    return matriz
+
+
+def func_logistica(x: float):
+    return 1 / (1 + math.exp(-x))

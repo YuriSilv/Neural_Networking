@@ -23,22 +23,33 @@ class associativa():
           return linear_algebra.matriz_multi(self.w0, estimulo)
 
 
-class Adaline():
-     def __init__(self, n: float, x_atr: list, t_res: list, maxInterator: int):
+class Adaline_logistica():
+     def __init__(self, n: float, x_atr: list, t_res: list, maxInterator: int, rows: int, cols: int):
           self.n = n
-          self.w0 = linear_algebra.create_matrix(6, 3, randomize=True)
+          self.w0 = linear_algebra.create_matrix(rows, cols, randomize=True)
           self.x_atr = x_atr
-          self.t_res = t_res
+          self.t_res = t_res  
           self.maxInterator = maxInterator
           linear_algebra.print_matrix(self.w0)
 
 
      def fit(self):
           while(self.maxInterator != 0):
-               organismo = linear_algebra.matriz_multi(linear_algebra.transposta(self.w0), self.x_atr)
-               erro_matriz = linear_algebra.matriz_sum(self.t_res, organismo, isSub=True)
-               print(f'Erro e = {linear_algebra.calcular_erro_abs(erro_matriz)}')
-               delta_w = linear_algebra.matriz_multi_scalar(linear_algebra.matriz_multi(self.x_atr, linear_algebra.transposta(erro_matriz)), self.n)
+               self.organismo = linear_algebra.matriz_multi(linear_algebra.transposta(self.w0), self.x_atr)
+               
+               for i in range(len(self.organismo)):
+                    for j in range(len(self.organismo[0])):
+                         self.organismo[i][j] = round(linear_algebra.func_logistica(self.organismo[i][j]), 4)
+
+               erro_matriz = linear_algebra.matriz_sum(self.t_res, self.organismo, isSub=True)
+               print(f'Erro e = {linear_algebra.calcular_erro_abs(erro_matriz)} - Interação {self.maxInterator}')
+
+               delta_w = linear_algebra.matriz_multi((linear_algebra.matriz_multi_scalar(self.x_atr, self.n)), 
+                                                     (linear_algebra.transposta(
+                                                       linear_algebra.hadamard_multi(
+                                                       linear_algebra.hadamard_multi(erro_matriz, self.organismo), 
+                                                       (linear_algebra.escalar_subtr(1, self.organismo))))))
+               
                self.w0 = linear_algebra.matriz_sum(self.w0, delta_w)
                self.maxInterator -= 1
 
