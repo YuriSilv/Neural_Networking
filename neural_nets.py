@@ -52,10 +52,9 @@ class Adaline_logistica():
                
                self.w0 = linear_algebra.matriz_sum(self.w0, delta_w)
                self.maxInterator -= 1
-
                if(linear_algebra.acceptable_matrix(erro_matriz, limit_lower=-0.0001, limit_upper=0.0001)):
                     print(erro_matriz)
                     break     
      
      def predict(self, estimulo: list):
-          return linear_algebra.matriz_multi(self.w0, estimulo)
+          return linear_algebra.matriz_multi(linear_algebra.transposta(self.w0), estimulo)

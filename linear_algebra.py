@@ -1,7 +1,7 @@
 import random
 import math
 
-def create_matrix(rows: int, cols: int, randomize: bool = False, round_factor: int = 3):
+def create_matrix(rows: int, cols: int, randomize: bool = False, round_factor: int = 3, w_padrao: list = []):
     matriz = []
     for row in range(rows):
         matriz.append([])
@@ -9,7 +9,7 @@ def create_matrix(rows: int, cols: int, randomize: bool = False, round_factor: i
             if(randomize):
                 matriz[row].append(round(random.random(), round_factor))
                 continue
-            matriz[row].append(0)
+            matriz = w_padrao
     
     return matriz
 
@@ -43,7 +43,7 @@ def matriz_multi_scalar(a: list, y: float):
 
     return matriz
 
-def matriz_multi(a: list, b: list, round_factor: int = 3):
+def matriz_multi(a: list, b: list, round_factor: int = 4):
     rows_a = len(a)
     cols_a = len(a[0])
     rows_b = len(b)
@@ -82,7 +82,7 @@ def norma(a: list):
     return norma ** (1/2)
 
 def calcular_erro_abs(matriz_erro):
-    soma_absoluta = sum(sum(abs(valor) for valor in linha) for linha in matriz_erro)
+    soma_absoluta = sum(abs(sum(valor for valor in linha)) for linha in matriz_erro)
     
     return soma_absoluta
 
